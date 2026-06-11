@@ -15,7 +15,7 @@
                 label="Libellé"
                 placeholder="Ex : 2026-2027"
                 value="{{ old('libelle') }}"
-                :required="true" />
+                 />
 
             <div class="grid grid-cols-2 gap-4">
                 <x-form.input
@@ -23,14 +23,14 @@
                     label="Date de début"
                     type="date"
                     value="{{ old('date_debut') }}"
-                    :required="true" />
+                     />
 
                 <x-form.input
                     name="date_fin"
                     label="Date de fin"
                     type="date"
                     value="{{ old('date_fin') }}"
-                    :required="true" />
+                     />
             </div>
 
             <div class="flex items-center gap-3">
