@@ -1,32 +1,33 @@
 @extends('layouts.app')
 
 @section('title', 'Nouvelle Année Académique')
-
 @section('content')
 
     <x-page-header title="Nouvelle Année Académique" subtitle="Créer une nouvelle année académique." />
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
         <form action="/academic/academic-years" method="POST" class="space-y-5">
+          
+
 
             <x-form.input
                 name="libelle"
                 label="Libellé"
                 placeholder="Ex : 2026-2027"
-                :required="true" />
+                 />
 
             <div class="grid grid-cols-2 gap-4">
                 <x-form.input
                     name="date_debut"
                     label="Date de début"
                     type="date"
-                    :required="true" />
+                     />
 
                 <x-form.input
                     name="date_fin"
                     label="Date de fin"
                     type="date"
-                    :required="true" />
+                     />
             </div>
 
             <div class="flex items-center gap-3">
