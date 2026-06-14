@@ -6,9 +6,9 @@
     <x-page-header title="Nouvelle Année Académique" subtitle="Créer une nouvelle année académique." />
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
-        <form action="/academic/academic-years" method="POST" class="space-y-5">
+        <form action="{{ route('academic.academic-years.store') }}" method="POST" class="space-y-5">
           
-
+             @csrf
 
             <x-form.input
                 name="libelle"

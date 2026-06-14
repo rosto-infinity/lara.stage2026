@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Academic\AcademicYearController;
 use Illuminate\Support\Facades\Route;
 
 // ─────────────────────────────────────────
@@ -13,10 +14,9 @@ Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 // ─────────────────────────────────────────
 Route::prefix('academic')->name('academic.')->group(function () {
 
-    // Années Académiques
-    Route::get('academic-years',        fn() => view('academic.academic-years.academic-years-index'))->name('academic-years.index');
-    Route::get('academic-years/create', fn() => view('academic.academic-years.academic-years-create'))->name('academic-years.create');
-    Route::get('academic-years/{id}/edit', fn($id) => view('academic.academic-years.academic-years-edit'))->name('academic-years.edit');
+   
+  // Années académiques (Avec contrôleur)
+    Route::resource('academic-years', AcademicYearController::class)->except(['show']);
 
     // Filières
     Route::get('programs',        fn() => view('academic.programs.programs-index'))->name('programs.index');

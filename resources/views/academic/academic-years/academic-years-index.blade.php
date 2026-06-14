@@ -3,7 +3,7 @@
 @section('title', 'Années Académiques')
 
 @section('actions')
-    <a href="/academic/academic-years/create"
+    <a href="{{ route('academic.academic-years.create') }}"
        class="inline-flex items-center gap-1.5 px-3 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
@@ -57,90 +57,66 @@
             </thead>
             <tbody class="divide-y divide-gray-100">
 
-                {{-- Année active --}}
+                @forelse($academicYears as $year)
                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 font-medium text-gray-900">2025-2026</td>
-                    <td class="px-4 py-3 text-gray-600">01/09/2025</td>
-                    <td class="px-4 py-3 text-gray-600">30/06/2026</td>
+                    <td class="px-4 py-3 font-medium text-gray-900">{{ $year->libelle }}</td>
+                    <td class="px-4 py-3 text-gray-600">{{ $year->date_debut->format('d/m/Y') }}</td>
+                    <td class="px-4 py-3 text-gray-600">{{ $year->date_fin->format('d/m/Y') }}</td>
                     <td class="px-4 py-3">
-                        <x-badge color="green">Active</x-badge>
+                        @if($year->est_active)
+                            <x-badge color="green">Active</x-badge>
+                        @else
+                            <x-badge color="gray">Inactive</x-badge>
+                        @endif
                     </td>
                     <td class="px-4 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <form action="/academic/academic-years/1/deactivate" method="POST" class="inline">
-                                <button type="submit"
-                                    class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                                    Désactiver
-                                </button>
-                            </form>
-                            <a href="/academic/academic-years/1/edit"
+                            @if($year->est_active)
+                                <form action="#" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit"
+                                        class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                                        Désactiver
+                                    </button>
+                                </form>
+                            @else
+                                <form action="#" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit"
+                                        class="px-2.5 py-1.5 text-xs font-medium border border-red-300 rounded-md text-red-700 hover:bg-red-50 transition-colors">
+                                        Activer
+                                    </button>
+                                </form>
+                            @endif
+
+                            <a href="{{ route('academic.academic-years.edit', $year->id) }}"
                                class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                                 Modifier
                             </a>
+
+                            @if(!$year->est_active)
+                                <form action="{{ route('academic.academic-years.destroy', $year->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors">
+                                        Supprimer
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </td>
                 </tr>
-
-                {{-- Année inactive 1 --}}
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 font-medium text-gray-900">2024-2025</td>
-                    <td class="px-4 py-3 text-gray-600">01/09/2024</td>
-                    <td class="px-4 py-3 text-gray-600">30/06/2025</td>
-                    <td class="px-4 py-3">
-                        <x-badge color="gray">Inactive</x-badge>
-                    </td>
-                    <td class="px-4 py-3 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <form action="/academic/academic-years/2/activate" method="POST" class="inline">
-                                <button type="submit"
-                                    class="px-2.5 py-1.5 text-xs font-medium border border-red-300 rounded-md text-red-700 hover:bg-red-50 transition-colors">
-                                    Activer
-                                </button>
-                            </form>
-                            <a href="/academic/academic-years/2/edit"
-                               class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                                Modifier
-                            </a>
-                            <form action="/academic/academic-years/2" method="POST" class="inline">
-                                <button type="submit"
-                                    class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </div>
+                @empty
+                <tr>
+                    <td colspan="5" class="px-4 py-8 text-center">
+                        <x-empty-state
+                            message="Aucune année académique enregistrée."
+                            action-label="Ajouter une année"
+                            action-url="{{ route('academic.academic-years.create') }}" />
                     </td>
                 </tr>
-
-                {{-- Année inactive 2 --}}
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-4 py-3 font-medium text-gray-900">2023-2024</td>
-                    <td class="px-4 py-3 text-gray-600">01/09/2023</td>
-                    <td class="px-4 py-3 text-gray-600">30/06/2024</td>
-                    <td class="px-4 py-3">
-                        <x-badge color="gray">Inactive</x-badge>
-                    </td>
-                    <td class="px-4 py-3 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <form action="/academic/academic-years/3/activate" method="POST" class="inline">
-                                <button type="submit"
-                                    class="px-2.5 py-1.5 text-xs font-medium border border-red-300 rounded-md text-red-700 hover:bg-red-50 transition-colors">
-                                    Activer
-                                </button>
-                            </form>
-                            <a href="/academic/academic-years/3/edit"
-                               class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                                Modifier
-                            </a>
-                            <form action="/academic/academic-years/3" method="POST" class="inline">
-                                <button type="submit"
-                                    class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-
+                @endforelse
             </tbody>
         </table>
     </div>
