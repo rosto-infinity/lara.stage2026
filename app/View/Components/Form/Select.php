@@ -5,43 +5,7 @@ namespace App\View\Components\Form;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-/**
- * Composant liste déroulante (form/select).
- *
- * Génère un champ <select> avec label, option de placeholder non-sélectionnable,
- * gestion des erreurs de validation et persistance de la sélection via `old()`.
- *
- * ⚠️  Standard sécurité STALL :
- *     L'attribut HTML `required` est INTERDIT en frontend.
- *     La prop $required affiche uniquement l'astérisque visuel (*).
- *
- * Structure du tableau $options :
- *   Clé   → valeur soumise dans le formulaire (ex : ID)
- *   Valeur → libellé affiché dans la liste   (ex : nom)
- *
- * Utilisation Blade :
- * ─────────────────────────────────────────────────────────────
- *   {{-- Options statiques --}}
- *   <x-form.select
- *       name="gender"
- *       label="Genre"
- *       :options="['M' => 'Masculin', 'F' => 'Féminin']"
- *       :required="true"
- *   />
- *
- *   {{-- Options dynamiques depuis la DB --}}
- *   <x-form.select
- *       name="program_id"
- *       label="Programme"
- *       :options="$programs->pluck('name', 'id')->all()"
- *       :selected="$student->program_id"
- *       placeholder="-- Choisir un programme --"
- *   />
- * ─────────────────────────────────────────────────────────────
- *
- * @see resources/views/components/form/select.blade.php
- * @see app/Livewire/Forms/ pour la validation backend associée
- */
+
 class Select extends Component
 {
     /**

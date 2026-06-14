@@ -1,18 +1,3 @@
-{{--
-    Composant : <x-empty-state>
-    Classe    : App\View\Components\EmptyState
-    Props     : $message     (string)       – texte affiché sous l'icône  [défaut: 'Aucun enregistrement trouvé.']
-                $actionLabel (string|null)  – libellé du bouton d'action  [défaut: null → bouton masqué]
-                $actionUrl   (string)       – URL du bouton d'action       [défaut: '#']
-
-    Exemple :
-        <x-empty-state
-            message="Aucun étudiant inscrit."
-            actionLabel="Inscrire un étudiant"
-            actionUrl="{{ route('students.create') }}"
-        />
---}}
-
 <div class="flex flex-col items-center justify-center py-16 text-center">
 
     {{-- Icône illustrative : archive/boîte vide --}}

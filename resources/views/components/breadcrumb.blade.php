@@ -1,17 +1,3 @@
-{{--
-    Composant : <x-breadcrumb>
-    Classe    : App\View\Components\Breadcrumb
-    Props     : $items (array) – liste de segments ['label' => string, 'url' => string?]
-                Le dernier élément est rendu comme <span> (page courante, sans lien).
-                Les éléments précédents sont rendus comme <a href>.
-
-    Exemple :
-        <x-breadcrumb :items="[
-            ['label' => 'Étudiants', 'url' => route('students.index')],
-            ['label' => $student->full_name],
-        ]" />
---}}
-
 <nav class="flex items-center gap-1 text-sm text-gray-500" aria-label="Fil d'Ariane">
 
     {{-- Racine fixe : toujours présente --}}

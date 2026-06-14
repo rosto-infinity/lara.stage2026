@@ -1,20 +1,3 @@
-{{--
-    Composant : <x-stat-card>
-    Classe    : App\View\Components\StatCard
-    Props     : $label      (string)         – libellé de la métrique (ex: "Total étudiants")
-                $value      (int|string)     – valeur numérique ou textuelle affichée en grand
-                $color      (string)         – couleur de la valeur : 'gray' | 'red' | 'green' | 'amber' [défaut: 'gray']
-    Variables : $valueColor (string)         – classe CSS résolue par la classe PHP
-    Slots     : $icon       – slot nommé : icône SVG optionnelle dans le carré gris
-
-    Exemple :
-        <x-stat-card label="Inscrits" :value="$totalStudents" color="green">
-            <x-slot name="icon">
-                <x-heroicon-o-users class="w-5 h-5" />
-            </x-slot>
-        </x-stat-card>
---}}
-
 <div class="rounded-md border border-gray-200 bg-white px-5 py-4 flex items-center gap-4">
 
     {{-- Icône optionnelle dans un carré gris (slot nommé $icon) --}}

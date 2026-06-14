@@ -5,36 +5,7 @@ namespace App\View\Components\Form;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-/**
- * Composant champ de saisie texte (form/input).
- *
- * Génère un champ <input> avec label, gestion des erreurs de validation
- * et persistance de la valeur via la helper `old()` de Laravel.
- *
- * ⚠️  Standard sécurité STALL :
- *     L'attribut HTML `required` est INTERDIT en frontend (manipulation inspecteur).
- *     La validation obligatoire se fait exclusivement dans le Form Object backend.
- *     La prop $required ici est conservée uniquement pour l'affichage de l'astérisque (*).
- *
- * Utilisation Blade :
- * ─────────────────────────────────────────────────────────────
- *   {{-- Champ simple --}}
- *   <x-form.input name="first_name" label="Prénom" />
- *
- *   {{-- Champ avec valeur pré-remplie et obligatoire (visuel) --}}
- *   <x-form.input
- *       name="email"
- *       label="Adresse e-mail"
- *       type="email"
- *       :value="$student->email"
- *       :required="true"
- *       placeholder="exemple@gest.cd"
- *   />
- * ─────────────────────────────────────────────────────────────
- *
- * @see resources/views/components/form/input.blade.php
- * @see app/Livewire/Forms/ pour la validation backend associée
- */
+
 class Input extends Component
 {
     /**

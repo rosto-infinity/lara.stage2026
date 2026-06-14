@@ -1,13 +1,3 @@
-{{--
-    Composant : <x-alert>
-    Classe    : App\View\Components\Alert
-    Props     : $type (string)  – 'success' | 'error' | 'warning' | 'info'  [défaut: 'success']
-    Variables : $cls (string)   – classes CSS résolues par la classe PHP
-    Slot      : $slot           – message textuel de l'alerte
-
-    Exemple : <x-alert type="success">Enregistrement sauvegardé.</x-alert>
---}}
-
 <div class="mx-6 mt-4 px-4 py-3 rounded-md border {{ $cls }} text-sm flex items-center justify-between gap-4">
     {{-- Message principal (slot par défaut) --}}
     <span>{{ $slot }}</span>

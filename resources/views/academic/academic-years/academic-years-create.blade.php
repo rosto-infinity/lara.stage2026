@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Nouvelle Année Académique')
-@section('content')
+ @section('content')
 
     <x-page-header title="Nouvelle Année Académique" subtitle="Créer une nouvelle année académique." />
 

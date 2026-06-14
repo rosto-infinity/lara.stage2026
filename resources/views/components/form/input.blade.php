@@ -1,19 +1,3 @@
-{{--
-    Composant : <x-form.input>
-    Classe    : App\View\Components\Form\Input
-    Props     : $name        (string)      – attribut name/id du champ (obligatoire)
-                $label       (string|null) – libellé affiché au-dessus  [défaut: null]
-                $type        (string)      – type HTML de l'input        [défaut: 'text']
-                $value       (string)      – valeur initiale             [défaut: '']
-                $required    (bool)        – affiche l'astérisque (*)    [défaut: false]
-                $placeholder (string)      – texte d'invite              [défaut: '']
-
-    ⚠️  Standard STALL : l'attribut HTML `required` est intentionnellement absent
-        de la balise <input>. La validation est gérée exclusivement côté backend.
-
-    Exemple :
-        <x-form.input name="email" label="E-mail" type="email" :required="true" />
---}}
 
 <div class="space-y-1">
 

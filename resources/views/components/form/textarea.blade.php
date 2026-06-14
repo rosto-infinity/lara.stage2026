@@ -1,24 +1,3 @@
-{{--
-    Composant : <x-form.textarea>
-    Classe    : App\View\Components\Form\Textarea
-    Props     : $name        (string)      – attribut name/id du champ (obligatoire)
-                $label       (string|null) – libellé affiché au-dessus  [défaut: null]
-                $value       (string)      – contenu initial             [défaut: '']
-                $rows        (int)         – nombre de lignes visibles   [défaut: 4]
-                $required    (bool)        – affiche l'astérisque (*)    [défaut: false]
-                $placeholder (string)      – texte d'invite              [défaut: '']
-
-    ⚠️  Standard STALL : l'attribut HTML `required` est intentionnellement absent.
-
-    Exemple :
-        <x-form.textarea
-            name="description"
-            label="Description"
-            :value="$program->description"
-            :rows="6"
-        />
---}}
-
 <div class="space-y-1">
 
     {{-- Label avec astérisque si champ obligatoire --}}

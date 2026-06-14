@@ -5,35 +5,6 @@ namespace App\View\Components\Form;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-/**
- * Composant zone de texte multi-lignes (form/textarea).
- *
- * Génère un champ <textarea> avec label, gestion des erreurs de validation
- * et persistance du contenu via la helper `old()` de Laravel.
- *
- * ⚠️  Standard sécurité STALL :
- *     L'attribut HTML `required` est INTERDIT en frontend.
- *     La prop $required affiche uniquement l'astérisque visuel (*).
- *
- * Utilisation Blade :
- * ─────────────────────────────────────────────────────────────
- *   {{-- Zone de texte simple --}}
- *   <x-form.textarea name="notes" label="Observations" />
- *
- *   {{-- Avec valeur pré-remplie et hauteur personnalisée --}}
- *   <x-form.textarea
- *       name="description"
- *       label="Description du programme"
- *       :value="$program->description"
- *       :rows="6"
- *       :required="true"
- *       placeholder="Décrivez les objectifs pédagogiques…"
- *   />
- * ─────────────────────────────────────────────────────────────
- *
- * @see resources/views/components/form/textarea.blade.php
- * @see app/Livewire/Forms/ pour la validation backend associée
- */
 class Textarea extends Component
 {
     /**

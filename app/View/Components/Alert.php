@@ -5,22 +5,6 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-/**
- * Composant d'alerte contextuelle (notification bannière).
- *
- * Affiche un bandeau coloré avec un bouton de fermeture inline (JS natif).
- * Supporte quatre niveaux sémantiques : success, error, warning, info.
- *
- * Utilisation Blade :
- * ─────────────────────────────────────────────────────────────
- *   <x-alert type="success">Enregistrement sauvegardé.</x-alert>
- *   <x-alert type="error">Une erreur est survenue.</x-alert>
- *   <x-alert type="warning">Attention, action irréversible.</x-alert>
- *   <x-alert type="info">Informations complémentaires.</x-alert>
- * ─────────────────────────────────────────────────────────────
- *
- * @see resources/views/components/alert.blade.php
- */
 class Alert extends Component
 {
     /**

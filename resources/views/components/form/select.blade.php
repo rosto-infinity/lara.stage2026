@@ -1,24 +1,3 @@
-{{--
-    Composant : <x-form.select>
-    Classe    : App\View\Components\Form\Select
-    Props     : $name        (string)           – attribut name/id du champ (obligatoire)
-                $label       (string|null)       – libellé affiché au-dessus  [défaut: null]
-                $options     (array)             – tableau [valeur => libellé] des options
-                $selected    (int|string|null)   – valeur présélectionnée      [défaut: null]
-                $placeholder (string)            – texte de l'option vide      [défaut: 'Sélectionner…']
-                $required    (bool)              – affiche l'astérisque (*)    [défaut: false]
-
-    ⚠️  Standard STALL : l'attribut HTML `required` est intentionnellement absent.
-
-    Exemple :
-        <x-form.select
-            name="program_id"
-            label="Programme"
-            :options="$programs->pluck('name', 'id')->all()"
-            :selected="$student->program_id"
-        />
---}}
-
 <div class="space-y-1">
 
     {{-- Label avec astérisque si champ obligatoire --}}

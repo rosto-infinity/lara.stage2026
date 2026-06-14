@@ -5,24 +5,7 @@ namespace App\View\Components;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-/**
- * Composant badge — étiquette colorée compacte (pill / label).
- *
- * Utilisé pour afficher des statuts, des catégories ou des indicateurs visuels
- * de petite taille (ex : statut d'un étudiant, d'un cours, d'un niveau).
- *
- * Utilisation Blade :
- * ─────────────────────────────────────────────────────────────
- *   <x-badge color="green">Actif</x-badge>
- *   <x-badge color="red">Archivé</x-badge>
- *   <x-badge color="amber">En attente</x-badge>
- *   <x-badge color="purple">Spécial</x-badge>
- *   <x-badge color="black">Admin</x-badge>
- *   <x-badge>Par défaut (gray)</x-badge>
- * ─────────────────────────────────────────────────────────────
- *
- * @see resources/views/components/badge.blade.php
- */
+
 class Badge extends Component
 {
     /**
