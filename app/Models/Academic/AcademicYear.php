@@ -55,20 +55,4 @@ class AcademicYear extends Model
             }
         });
     }
-
-    /**
-     * Activer l'année académique.
-     */
-    public function activate(): bool
-    {
-        return $this->update(['est_active' => true]);
-    }
-
-    /**
-     * Désactiver l'année académique.
-     */
-    public function deactivate(): bool
-    {
-        return $this->update(['est_active' => false]);
-    }
 }

@@ -37,7 +37,7 @@ class AcademicYearController extends Controller
 {
     // Laravel 13 : Les données sont déjà validées et typées ici
     AcademicYear::create($request->validated());
-
+   
     return to_route('academic.academic-years.index')
         ->with('success', "L'année académique a bien été créée.");
 }
@@ -66,11 +66,12 @@ class AcademicYearController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AcademicYear $academicYear)
+    public function toggle(AcademicYear $academicYear): RedirectResponse
     {
-        //
+        $academicYear->update(['est_active' => !$academicYear->est_active]);
+
+        $status = $academicYear->est_active ? 'activée' : 'désactivée';
+
+        return back()->with('success', "L'année académique {$academicYear->libelle} a été {$status}.");
     }
 }

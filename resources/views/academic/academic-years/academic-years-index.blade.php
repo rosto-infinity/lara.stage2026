@@ -55,8 +55,7 @@
                     <th class="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-
+           <tbody class="divide-y divide-gray-100">
                 @forelse($academicYears as $year)
                 <tr class="hover:bg-gray-50 transition-colors">
                     <td class="px-4 py-3 font-medium text-gray-900">{{ $year->libelle }}</td>
@@ -71,31 +70,22 @@
                     </td>
                     <td class="px-4 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            @if($year->est_active)
-                                <form action="#" method="POST" class="inline">
-                                    @csrf
-                                    <button type="submit"
-                                        class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
-                                        Désactiver
-                                    </button>
-                                </form>
-                            @else
-                                <form action="#" method="POST" class="inline">
-                                    @csrf
-                                    <button type="submit"
-                                        class="px-2.5 py-1.5 text-xs font-medium border border-red-300 rounded-md text-red-700 hover:bg-red-50 transition-colors">
-                                        Activer
-                                    </button>
-                                </form>
-                            @endif
+                            <form action="{{ route('academic.academic-years.toggle', $year) }}" method="POST" class="inline">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit"
+                                    class="px-2.5 py-1.5 text-xs font-medium border rounded-md transition-colors {{ $year->est_active ? 'border-gray-300 text-gray-700 hover:bg-gray-100' : 'border-red-300 text-red-700 hover:bg-red-50' }}">
+                                    {{ $year->est_active ? 'Désactiver' : 'Activer' }}
+                                </button>
+                            </form>
 
-                            <a href="{{ route('academic.academic-years.edit', $year->id) }}"
+                            <a href="{{ route('academic.academic-years.edit', $year) }}"
                                class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
                                 Modifier
                             </a>
 
                             @if(!$year->est_active)
-                                <form action="{{ route('academic.academic-years.destroy', $year->id) }}" method="POST" class="inline">
+                                <form action="{{ route('academic.academic-years.destroy', $year) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

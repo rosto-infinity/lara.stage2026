@@ -18,6 +18,9 @@ Route::prefix('academic')->name('academic.')->group(function () {
   // Années académiques (Avec contrôleur)
     Route::resource('academic-years', AcademicYearController::class)->except(['show']);
 
+    Route::patch('academic-years/{academicYear}/toggle', [AcademicYearController::class, 'toggle'])
+        ->name('academic-years.toggle');
+
     // Filières
     Route::get('programs',        fn() => view('academic.programs.programs-index'))->name('programs.index');
     Route::get('programs/create', fn() => view('academic.programs.programs-create'))->name('programs.create');
