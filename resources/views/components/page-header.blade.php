@@ -1,19 +1,3 @@
-{{--
-    Composant : <x-page-header>
-    Classe    : App\View\Components\PageHeader
-    Props     : $title    (string)      – titre principal H1 de la page (obligatoire)
-                $subtitle (string|null) – sous-titre descriptif optionnel [défaut: null]
-    Slots     : $slot    – slot par défaut (inutilisé)
-                $actions – slot nommé : boutons d'action alignés à droite
-
-    Exemple :
-        <x-page-header title="Programmes" subtitle="Gestion des formations.">
-            <x-slot name="actions">
-                <a href="{{ route('programs.create') }}" class="btn-primary">Nouveau</a>
-            </x-slot>
-        </x-page-header>
---}}
-
 <div class="flex items-start justify-between mb-6">
 
     {{-- Bloc titre + sous-titre --}}

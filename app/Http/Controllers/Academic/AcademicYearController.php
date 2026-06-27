@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Academic;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Academic\StoreAcademicYearRequest;
+use App\Http\Requests\Academic\UpdateAcademicYearRequest;
 use App\Models\Academic\AcademicYear;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class AcademicYearController extends Controller
 {
@@ -17,8 +17,8 @@ class AcademicYearController extends Controller
     {
         // return view('academic.academic-years.academic-years-index', [
         // 'academicYears' => AcademicYear::latest('date_debut')->paginate(15)
-  
-         $academicYears = AcademicYear::orderByDesc('date_debut')->paginate(15);
+
+        $academicYears = AcademicYear::orderByDesc('date_debut')->paginate(15);
         return view('academic.academic-years.academic-years-index', compact('academicYears'));
     }
 
@@ -27,43 +27,43 @@ class AcademicYearController extends Controller
      */
     public function create()
     {
-       return view('academic.academic-years.academic-years-create');
+        return view('academic.academic-years.academic-years-create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-   public function store(StoreAcademicYearRequest $request): RedirectResponse
-{
-    // Laravel 13 : Les données sont déjà validées et typées ici
-    AcademicYear::create($request->validated());
-   
-    return to_route('academic.academic-years.index')
-        ->with('success', "L'année académique a bien été créée.");
-}
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(AcademicYear $academicYear)
+    public function store(StoreAcademicYearRequest $request): RedirectResponse
     {
-        //
+        // Laravel 13 : Les données sont déjà validées et typées ici
+        AcademicYear::create($request->validated());
+
+        return to_route('academic.academic-years.index')
+            ->with('success', "L'année académique a bien été créée.");
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AcademicYear $academicYear)
+    public function edit(int $id)
     {
-        //
+        $academicYear = AcademicYear::findOrFail($id);
+        return view('academic.academic-years.academic-years-edit', compact('academicYear'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AcademicYear $academicYear)
+    public function update(UpdateAcademicYearRequest $request, int $id): RedirectResponse
     {
-        //
+        $academicYear = AcademicYear::findOrFail($id);
+
+        $validated = $request->validated();
+        $validated['est_active'] = $request->has('est_active');
+
+        $academicYear->update($validated);
+
+        return redirect()->route('academic.academic-years.index')
+            ->with('success', 'L\'année académique a bien été modifiée.');
     }
 
     public function toggle(AcademicYear $academicYear): RedirectResponse
@@ -73,5 +73,13 @@ class AcademicYearController extends Controller
         $status = $academicYear->est_active ? 'activée' : 'désactivée';
 
         return back()->with('success', "L'année académique {$academicYear->libelle} a été {$status}.");
+    }
+
+    public function destroy(int $id)
+    {
+        $academicYear = AcademicYear::findOrFail($id);
+        $academicYear->delete();
+        return redirect()->route('academic.academic-years.index')
+            ->with('success', 'L\'année académique a été supprimée.');
     }
 }

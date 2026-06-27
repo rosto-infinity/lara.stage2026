@@ -85,14 +85,10 @@
                             </a>
 
                             @if(!$year->est_active)
-                                <form action="{{ route('academic.academic-years.destroy', $year) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors">
-                                        Supprimer
-                                    </button>
-                                </form>
+                                <x-confirm-delete
+                                    action="{{ route('academic.academic-years.destroy', $year) }}"
+                                    message="Êtes-vous sûr de vouloir supprimer l'année « {{ $year->libelle }} » ? Cette action est irréversible."
+                                    class="px-2.5 py-1.5 text-xs font-medium border border-gray-300 rounded-md text-gray-400 hover:text-red-600 hover:border-red-300 transition-colors" />
                             @endif
                         </div>
                     </td>

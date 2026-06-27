@@ -7,12 +7,13 @@
     <x-page-header title="Modifier l'Année Académique" subtitle="2025-2026" />
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
-        <form action="/academic/academic-years/1" method="POST" class="space-y-5">
-
+        <form action="{{ route('academic.academic-years.update', $academicYear->id) }}" method="POST" class="space-y-5">
+              @csrf
+            @method('PATCH')
             <x-form.input
                 name="libelle"
                 label="Libellé"
-                value="2025-2026"
+                value="{{ $academicYear->libelle }}"
                 :required="true" />
 
             <div class="grid grid-cols-2 gap-4">
