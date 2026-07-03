@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AcademicYearSeeder::class,
-          
+            AcademicStructureSeeder::class,
         ]);
     }
 }

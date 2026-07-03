@@ -5,14 +5,15 @@
     <x-page-header title="Nouvelle Filière" subtitle="Créer une filière de formation." />
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
-        <form action="/academic/programs" method="POST" class="space-y-5">
+        <form action="{{ route('academic.programs.store') }}" method="POST" class="space-y-5">
+            @csrf
 
             <div class="grid grid-cols-2 gap-4">
                 <x-form.input name="code" label="Code" placeholder="Ex : GI" :required="true" />
                 <x-form.select
                     name="type_diplome"
                     label="Type de diplôme"
-                    :options="['licence' => 'Licence', 'master' => 'Master', 'doctorat' => 'Doctorat', 'bts' => 'BTS']"
+                    :options="\App\Enums\DiplomaType::forSelect()"
                     :required="true" />
             </div>
 
@@ -27,7 +28,7 @@
                     class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors">
                     Enregistrer
                 </button>
-                <a href="/academic/programs"
+                <a href="{{ route('academic.programs.index') }}"
                    class="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     Annuler
                 </a>

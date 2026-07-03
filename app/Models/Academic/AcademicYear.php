@@ -3,15 +3,9 @@
 namespace App\Models\Academic;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
 class AcademicYear extends Model
 {
-    /**
-     * Les attributs qui sont assignables en masse.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'libelle',
         'date_debut',
@@ -19,11 +13,6 @@ class AcademicYear extends Model
         'est_active',
     ];
 
-    /**
-     * Obtenir les transtypages (casts) des attributs.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -33,12 +22,8 @@ class AcademicYear extends Model
         ];
     }
 
-    /**
-     * Le hook "booted" remplace l'ancien "boot".
-     */
     protected static function booted(): void
     {
-        // Désactivation des autres années lors de la création d'une année active
         static::creating(function (AcademicYear $academicYear): void {
             if ($academicYear->est_active) {
                 static::where('est_active', true)
@@ -46,7 +31,6 @@ class AcademicYear extends Model
             }
         });
 
-        // Désactivation des autres années lors du passage à l'état actif
         static::updating(function (AcademicYear $academicYear): void {
             if ($academicYear->est_active && $academicYear->isDirty('est_active')) {
                 static::where('id', '!=', $academicYear->id)
@@ -54,5 +38,20 @@ class AcademicYear extends Model
                     ->update(['est_active' => false]);
             }
         });
+    }
+
+    public function activate(): bool
+    {
+        return $this->update(['est_active' => true]);
+    }
+
+    public function deactivate(): bool
+    {
+        return $this->update(['est_active' => false]);
+    }
+
+    public function getFormattedPeriod(): string
+    {
+        return $this->date_debut->format('d/m/Y') . ' — ' . $this->date_fin->format('d/m/Y');
     }
 }

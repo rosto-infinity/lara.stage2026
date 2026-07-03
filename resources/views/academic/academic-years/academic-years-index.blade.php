@@ -18,23 +18,22 @@
         title="Années Académiques"
         subtitle="Gestion et activation des années académiques." />
 
-    {{-- Stats --}}
     <div class="grid grid-cols-3 gap-4 mb-6">
-        <x-stat-card label="Total années" value="3" color="gray">
+        <x-stat-card label="Total années" :value="$academicYears->total()" color="gray">
             <x-slot name="icon">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
             </x-slot>
         </x-stat-card>
-        <x-stat-card label="Année active" value="1" color="green">
+        <x-stat-card label="Année active" :value="$academicYears->firstWhere('est_active', true)?->libelle ?? 'Aucune'" color="green">
             <x-slot name="icon">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
             </x-slot>
         </x-stat-card>
-        <x-stat-card label="Années inactives" value="2" color="gray">
+        <x-stat-card label="Années inactives" :value="$academicYears->where('est_active', false)->count()" color="gray">
             <x-slot name="icon">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -70,9 +69,8 @@
                     </td>
                     <td class="px-4 py-3 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <form action="{{ route('academic.academic-years.toggle', $year) }}" method="POST" class="inline">
+                            <form action="{{ $year->est_active ? route('academic.academic-years.deactivate', $year) : route('academic.academic-years.activate', $year) }}" method="POST" class="inline">
                                 @csrf
-                                @method('PATCH')
                                 <button type="submit"
                                     class="px-2.5 py-1.5 text-xs font-medium border rounded-md transition-colors {{ $year->est_active ? 'border-gray-300 text-gray-700 hover:bg-gray-100' : 'border-red-300 text-red-700 hover:bg-red-50' }}">
                                     {{ $year->est_active ? 'Désactiver' : 'Activer' }}
@@ -105,6 +103,10 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-4">
+        {{ $academicYears->links() }}
     </div>
 
 @endsection

@@ -7,7 +7,7 @@
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
         <form action="{{ route('academic.academic-years.store') }}" method="POST" class="space-y-5">
-          
+
              @csrf
 
             <x-form.input
@@ -20,14 +20,12 @@
                 <x-form.input
                     name="date_debut"
                     label="Date de début"
-                    type="date"
-                     />
+                    type="date" />
 
                 <x-form.input
                     name="date_fin"
                     label="Date de fin"
-                    type="date"
-                     />
+                    type="date" />
             </div>
 
             <div class="flex items-center gap-3">
@@ -44,7 +42,7 @@
                     class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors">
                     Enregistrer
                 </button>
-                <a href="/academic/academic-years"
+                <a href="{{ route('academic.academic-years.index') }}"
                    class="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     Annuler
                 </a>

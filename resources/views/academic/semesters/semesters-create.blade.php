@@ -5,12 +5,13 @@
     <x-page-header title="Nouveau Semestre" subtitle="Ajouter un semestre à un niveau." />
 
     <div class="max-w-xl bg-white border border-gray-200 rounded-md p-6">
-        <form action="/academic/semesters" method="POST" class="space-y-5">
+        <form action="{{ route('academic.semesters.store') }}" method="POST" class="space-y-5">
+            @csrf
 
             <x-form.select
                 name="level_id"
                 label="Niveau"
-                :options="[1 => 'Niveau 1 — Génie Informatique', 2 => 'Niveau 2 — Génie Informatique', 3 => 'Niveau 3 — Génie Logiciel']"
+                :options="$levels->mapWithKeys(fn($l) => [$l->id => $l->libelle . ' — ' . $l->program->libelle])->toArray()"
                 :required="true" />
 
             <div class="grid grid-cols-2 gap-4">
@@ -25,7 +26,7 @@
                     class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 transition-colors">
                     Enregistrer
                 </button>
-                <a href="/academic/semesters"
+                <a href="{{ route('academic.semesters.index') }}"
                    class="px-4 py-2 text-sm text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     Annuler
                 </a>

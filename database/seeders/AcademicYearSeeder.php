@@ -8,12 +8,14 @@ use Illuminate\Database\Seeder;
 
 class AcademicYearSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    use WithoutModelEvents;
+
     public function run(): void
     {
-        // Enregistrer d'abord les inactifs pour éviter les déclenchements de désactivation
+        if (AcademicYear::count() > 0) {
+            return;
+        }
+
         AcademicYear::create([
             'libelle' => '2023-2024',
             'date_debut' => '2023-09-01',
@@ -28,7 +30,6 @@ class AcademicYearSeeder extends Seeder
             'est_active' => false,
         ]);
 
-        // L'active en dernier
         AcademicYear::create([
             'libelle' => '2025-2026',
             'date_debut' => '2025-09-01',

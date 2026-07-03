@@ -47,39 +47,42 @@ class AcademicYearController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(int $id)
+    public function edit(AcademicYear $academicYear)
     {
-        $academicYear = AcademicYear::findOrFail($id);
         return view('academic.academic-years.academic-years-edit', compact('academicYear'));
     }
 
-    public function update(UpdateAcademicYearRequest $request, int $id): RedirectResponse
+    public function update(UpdateAcademicYearRequest $request, AcademicYear $academicYear): RedirectResponse
     {
-        $academicYear = AcademicYear::findOrFail($id);
-
         $validated = $request->validated();
         $validated['est_active'] = $request->has('est_active');
 
         $academicYear->update($validated);
 
-        return redirect()->route('academic.academic-years.index')
-            ->with('success', 'L\'année académique a bien été modifiée.');
+        return to_route('academic.academic-years.index')
+            ->with('success', "L'année académique a bien été modifiée.");
     }
 
-    public function toggle(AcademicYear $academicYear): RedirectResponse
+    public function destroy(AcademicYear $academicYear): RedirectResponse
     {
-        $academicYear->update(['est_active' => !$academicYear->est_active]);
-
-        $status = $academicYear->est_active ? 'activée' : 'désactivée';
-
-        return back()->with('success', "L'année académique {$academicYear->libelle} a été {$status}.");
-    }
-
-    public function destroy(int $id)
-    {
-        $academicYear = AcademicYear::findOrFail($id);
         $academicYear->delete();
-        return redirect()->route('academic.academic-years.index')
-            ->with('success', 'L\'année académique a été supprimée.');
+
+        return to_route('academic.academic-years.index')
+            ->with('success', "L'année académique a été supprimée.");
+    }
+
+    public function activate(AcademicYear $academicYear): RedirectResponse
+    {
+        $academicYear->activate();
+
+        return back()->with('success', "L'année académique {$academicYear->libelle} a été activée.");
+    }
+
+    public function deactivate(AcademicYear $academicYear): RedirectResponse
+    {
+        $academicYear->deactivate();
+
+        return back()->with('success', "L'année académique {$academicYear->libelle} a été désactivée.");
     }
 }
+
